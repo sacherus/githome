@@ -53,6 +53,10 @@ Plugin 'gerw/vim-latex-suite'
 autocmd FileType tex imap <f2> <Esc>:w<cr><leader>ll<C-O>a
 autocmd FileType tex nmap <f2> <Esc>:w<cr><leader>ll
 let g:Tex_DefaultTargetFormat='pdf'
+let g:Tex_BibtexFlavor = 'biber'
+let g:Tex_CompileRule_bib = g:Tex_BibtexFlavor . ' $*'
+let g:Tex_MultipleCompileFormats='pdf,dvi'
+let g:Tex_CompileRule_pdf='pdflatex --shell-escape -interaction=nonstopmode $*'
 
 Plugin 'KabbAmine/zeavim.vim'
 nmap NEW_MAPPING <Plug>Zeavim         " <leader>z (NORMAL mode)
@@ -70,7 +74,7 @@ filetype plugin indent on
 set tags=tags;
 "set autochdir
 
-map <f3> :setlocal spell spelllang=en_us<cr>set spellfile=./en.utf-8.add<cr>
+map <f3> :setlocal spell spelllang=en_us<cr>:set spellfile=./en.utf-8.add<cr>
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
