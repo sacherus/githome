@@ -1,22 +1,25 @@
 <<DONE
 sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+
 echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" | sudo tee /etc/apt/sources.list.d/docker.list
 
 #sudo apt-get update 
-sudo apt-get install --yes --force-yes docker-engine python-pip vim exuberant-ctags 
-sudo pip install docker-compose jupyter scikit-learn matplotlib
+sudo -H apt-get install --yes --force-yes docker-engine python-pip vim exuberant-ctags 
+sudo -H pip install docker-compose jupyter scikit-learn matplotlib
 
 (cd ~; git clone https://github.com/magicmonty/bash-git-prompt.git .bash-git-prompt --depth=1)
+DONE
 
-if ! $GIT_PROMPT_ONLY_IN_REPO; then
+if [[ ! $GIT_PROMPT_ONLY_IN_REPO ]]; then
 echo Adding beautiful git
 cat << EOF >> ~/.bashrc
-GIT_PROMPT_ONLY_IN_REPO=1
+export GIT_PROMPT_ONLY_IN_REPO=1
 source ~/.bash-git-prompt/gitprompt.sh
 EOF
-. ~/.bashrc
+echo Please . ~/.bashrc
 fi
 
+<<DONE
 echo "After"
 
 [[ ! -f ~/.vimrc ]] && cp .vimrc ~
